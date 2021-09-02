@@ -6,11 +6,6 @@
   <version>1.0.64-SNAPSHOT</version>
   <name>JCodings</name>
   <description>Byte based encoding support library for java</description>
-  <parent>
-    <groupId>org.sonatype.oss</groupId>
-    <artifactId>oss-parent</artifactId>
-    <version>7</version>
-  </parent>
   <licenses>
     <license>
       <name>MIT License</name>
@@ -40,6 +35,12 @@
     <system>Github</system>
     <url>https://github.com/jruby/jcodings/issues</url>
   </issueManagement>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+    <graalvm.shadowed.version>0</graalvm.shadowed.version>
+  </properties>
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
@@ -52,13 +53,6 @@
     <sourceDirectory>src</sourceDirectory>
     <scriptSourceDirectory>scripts</scriptSourceDirectory>
     <testSourceDirectory>test</testSourceDirectory>
-    <extensions>
-      <extension>
-        <groupId>org.apache.maven.wagon</groupId>
-        <artifactId>wagon-webdav-jackrabbit</artifactId>
-        <version>2.1</version>
-      </extension>
-    </extensions>
     <resources>
       <resource>
         <filtering>false</filtering>
@@ -107,6 +101,34 @@
           <trimStackTrace>false</trimStackTrace>
         </configuration>
       </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>3.2.4</version>
+        <configuration>
+          <artifactSet>
+            <includes>
+              <include>org.jcodings.*</include>
+            </includes>
+          </artifactSet>
+          <finalName>graalvm-shadowed-jcodings-1.0.56.${graalvm.shadowed.version}</finalName>
+          <relocations>
+            <relocation>
+              <pattern>org.jcodings</pattern>
+              <shadedPattern>org.graalvm.shadowed.org.jcodings</shadedPattern>
+            </relocation>
+          </relocations>
+          <trimStackTrace>false</trimStackTrace>
+        </configuration>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
   </build>
   <profiles>
@@ -148,7 +170,7 @@
           </plugin>
           <plugin>
             <artifactId>maven-javadoc-plugin</artifactId>
-            <version>3.0.1</version>
+            <version>3.3.0</version>
             <executions>
               <execution>
                 <id>attach-javadocs</id>
