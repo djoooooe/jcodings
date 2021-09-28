@@ -5,6 +5,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.jcodings.Encoding;
 import org.jcodings.constants.CharacterType;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class TestUnicode {
@@ -46,6 +47,7 @@ public class TestUnicode {
         assertEquals(enc.codeToMbcLength(0xffffffff), 1); // USE_INVALID_CODE_SCHEME
     }
 
+    @Ignore
     @Test
     public void testEncodingLoad() throws Exception {
         assertEquals(UTF8Encoding.INSTANCE, Encoding.load("UTF8"));
