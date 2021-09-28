@@ -138,20 +138,7 @@ public abstract class Transcoder implements TranscodingInstruction {
     }
 
     public static Transcoder load(String name) {
-        String encClassName = name;
-
-        Class<?> encClass;
-        try {
-            encClass = Class.forName(encClassName);
-        } catch (ClassNotFoundException cnfe) {
-            throw new InternalException(ErrorMessages.ERR_TRANSCODER_CLASS_DEF_NOT_FOUND, encClassName);
-        }
-
-        try {
-            return (Transcoder) encClass.getField("INSTANCE").get(encClass);
-        } catch (Exception e) {
-            throw new InternalException(ErrorMessages.ERR_TRANSCODER_LOAD_ERROR, encClassName);
-        }
+        throw new InternalException(ErrorMessages.ERR_TRANSCODER_CLASS_DEF_NOT_FOUND, name);
     }
 
     static final class GenericTranscoderEntry {
