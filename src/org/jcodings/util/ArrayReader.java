@@ -29,7 +29,7 @@ import org.jcodings.exception.InternalException;
 public class ArrayReader {
 
     public static DataInputStream openStream(String name) {
-        String entry = "/tables/" + name + ".bin";
+        String entry = "/org/graalvm/shadowed/org/jcodings/tables/" + name + ".bin";
         InputStream is = ArrayReader.class.getResourceAsStream(entry);
         if (is == null) throw new InternalException("entry: " + entry + " not found");
         return new DataInputStream(new BufferedInputStream(is));
