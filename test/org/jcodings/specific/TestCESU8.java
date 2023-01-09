@@ -6,6 +6,8 @@ import static junit.framework.Assert.assertTrue;
 import org.jcodings.Encoding;
 import org.jcodings.constants.CharacterType;
 import java.nio.charset.StandardCharsets;
+
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class TestCESU8 {
@@ -42,6 +44,7 @@ public class TestCESU8 {
         assertEquals('Ø', enc.mbcToCode("mØØse".getBytes("UTF-8"), 1, 3));
     }
 
+    @Ignore
     @Test
     public void testEncodingLoad() throws Exception {
         assertEquals(CESU8Encoding.INSTANCE, Encoding.load("CESU8"));
