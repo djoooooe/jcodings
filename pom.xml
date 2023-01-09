@@ -39,7 +39,8 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
-    <graalvm.shadowed.version>1</graalvm.shadowed.version>
+    <graalvm.shadowed.version>0</graalvm.shadowed.version>
+    <graalvm.shadowed.package>org.jcodings</graalvm.shadowed.package>
   </properties>
   <dependencies>
     <dependency>
@@ -108,14 +109,14 @@
         <configuration>
           <artifactSet>
             <includes>
-              <include>org.jcodings.*</include>
+              <include>${graalvm.shadowed.package}.*</include>
             </includes>
           </artifactSet>
-          <finalName>graalvm-shadowed-jcodings-1.0.56.${graalvm.shadowed.version}</finalName>
+          <finalName>graalvm-shadowed-${project.artifactId}-${project.version}.${graalvm.shadowed.version}</finalName>
           <relocations>
             <relocation>
-              <pattern>org.jcodings</pattern>
-              <shadedPattern>org.graalvm.shadowed.org.jcodings</shadedPattern>
+              <pattern>${graalvm.shadowed.package}</pattern>
+              <shadedPattern>org.graalvm.shadowed.${graalvm.shadowed.package}</shadedPattern>
             </relocation>
           </relocations>
           <trimStackTrace>false</trimStackTrace>
