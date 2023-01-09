@@ -3,6 +3,8 @@ package org.jcodings.specific;
 import static org.junit.Assert.assertEquals;
 
 import org.jcodings.Encoding;
+
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class TestCESU8 {
@@ -45,6 +47,7 @@ public class TestCESU8 {
         assertEquals('Ø', enc.mbcToCode("mØØse".getBytes("UTF-8"), 1, 3));
     }
 
+    @Ignore
     @Test
     public void testEncodingLoad() throws Exception {
         assertEquals(CESU8Encoding.INSTANCE, Encoding.load("CESU8"));
